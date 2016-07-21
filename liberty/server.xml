@@ -1,0 +1,48 @@
+<server description="new server">
+
+	<!-- Enable features -->
+	<featureManager>
+		<feature>wmqJmsClient-2.0</feature>
+		<feature>jdbc-4.1</feature>
+		<feature>servlet-3.1</feature>
+		<feature>appSecurity-2.0</feature>
+		<feature>osgiconsole-1.0</feature>
+		<feature>mdb-3.2</feature>
+		<feature>jsp-2.3</feature>
+	</featureManager>
+
+	<variable name="wmqJmsClient.rar.location"        
+	value="/wmq/wmq.jmsra.rar"/>
+
+	<basicRegistry id="basic" realm="BasicRealm"></basicRegistry>
+
+	<httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" host="*"/>
+
+	<jmsQueueConnectionFactory jndiName="jms/sample" connectionManagerRef="ConMgr6">
+		<properties.wmqJms
+			hostName="mqfull"
+			port="1414"
+			channel="SYSTEM.ADMIN.SVRCONN"
+			queueManager="QM1"/>
+	</jmsQueueConnectionFactory>
+
+	<jmsQueue id="jms/queue1" jndiName="jms/queue1">
+		<properties.wmqJms 
+			baseQueueName="Q1"
+			baseQueueManagerName="QM1"/>
+	</jmsQueue>
+
+	<jmsActivationSpec id="MQ_Test">
+		<properties.wmqJms
+			hostName="mqfull"
+			destinationRef="jms/queue1"
+			destinationType="javax.jms.Queue"
+			port="1414"
+			channel="SYSTEM.ADMIN.SVRCONN"/>
+	</jmsActivationSpec>
+
+	<connectionManager id="ConMgr6" maxPoolSize="2"/>
+	<basicRegistry>
+		<user password="" name=""></user>
+	</basicRegistry>
+</server>
