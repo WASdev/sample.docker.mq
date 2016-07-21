@@ -1,0 +1,25 @@
+mq:
+  build: .
+  environment:
+    LICENSE: accept
+    MQ_QMGR_NAME: QM1
+  ports:
+    - "1414:1414"
+liberty1:
+  build: liberty
+  environment:
+   LICENSE: accept
+  links:
+   - mq:mqfull
+  ports:
+   - "9080"
+   - "9443"
+liberty2:
+  build: liberty2
+  environment:
+   LICENSE: accept
+  links:
+   - mq:mqfull
+  ports:
+   - "9080"
+   - "9443"
