@@ -1,0 +1,28 @@
+<server description="Sender server">
+
+	<featureManager>
+		<feature>wmqJmsClient-2.0</feature>
+		<feature>servlet-3.1</feature>
+	</featureManager>
+
+	<variable name="wmqJmsClient.rar.location" value="/wmq/wmq.jmsra.rar"/>
+
+	<httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint" host="*"/>
+
+	<jmsQueueConnectionFactory jndiName="jms/connectionFactory" connectionManagerRef="ConMgr6">
+		<properties.wmqJms
+			hostName="mqfull"
+			port="1414"
+			channel="SYSTEM.ADMIN.SVRCONN"
+			queueManager="QM1"/>
+	</jmsQueueConnectionFactory>
+
+	<jmsQueue id="queue" jndiName="jms/queue">
+		<properties.wmqJms
+			baseQueueName="Q1"
+			baseQueueManagerName="QM1"/>
+	</jmsQueue>
+
+	<connectionManager id="ConMgr6" maxPoolSize="2"/>
+
+</server>

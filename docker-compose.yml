@@ -1,0 +1,21 @@
+mq:
+  build: mq
+  environment:
+    LICENSE: accept
+    MQ_QMGR_NAME: QM1
+  ports:
+    - "1414:1414"
+sender:
+  build: liberty-sender
+  links:
+   - mq:mqfull
+  ports:
+   - "9080"
+   - "9443"
+receiver:
+  build: liberty-receiver
+  links:
+   - mq:mqfull
+  ports:
+   - "9080"
+   - "9443"

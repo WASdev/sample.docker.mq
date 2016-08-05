@@ -1,0 +1,5 @@
+#!/bin/bash
+docker run -v $(pwd)/sender:/usr/src/sender -w /usr/src/sender maven mvn clean package
+docker run -v $(pwd)/receiver:/usr/src/receiver -w /usr/src/receiver maven mvn clean package
+cp sender/target/sender.war liberty-sender
+cp receiver/target/receiver.war liberty-receiver
