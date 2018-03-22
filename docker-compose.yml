@@ -3,6 +3,7 @@ mq:
   environment:
     LICENSE: accept
     MQ_QMGR_NAME: QM1
+    MQ_DEV: "false"
   ports:
     - "1414:1414"
 sender:
