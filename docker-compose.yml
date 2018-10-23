@@ -6,12 +6,14 @@
      environment:
        LICENSE: accept
        MQ_QMGR_NAME: QM1
+       MQ_ENABLE_METRICS: "true"
      # MQSNOAUT - This environment variable disables all authorization checking in MQ. 
      # This is not recommended for production environments
        MQSNOAUT: "yes"
      ports:
        - "1414:1414"
        - "9443:9443"
+       - "9157:9157"
    sender:
      build: liberty-sender
      ports:
